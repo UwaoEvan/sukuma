@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from 'react-native';
-import Snackbar from "react-native-snackbar";
 
 import { COLORS } from "../constants/colors";
 import Card from "../components/Card";
 import CustomButton from "../components/CustomButton";
+import Snackbar from "../components/Snackbar";
 
 export default function Home (){
-    Snackbar.show({
-        text: 'Hello world',
-        duration: Snackbar.LENGTH_SHORT,
-    })
-
+    const [modalVisible, setModalVisible] = useState(false);
+    const [clicked, setClicked] = useState(false);
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -30,7 +27,13 @@ export default function Home (){
                     <Card title="Goal 1"/>
                     <Card title="Goal 2"/>
                 </View>
-                <CustomButton style={{ marginBottom: 20 }}/>
+                <Snackbar 
+                    modalVisible={modalVisible} 
+                    setModalVisible={setModalVisible} 
+                    clicked={clicked}
+                    setClicked={setClicked}
+                />
+                <CustomButton style={{ marginBottom: 20 }} onPress={() => setModalVisible(true)}/>
             </View>
         </View>
     )
